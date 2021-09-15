@@ -1,8 +1,8 @@
 <?php 
-    class Home
+    class Home extends Controllers
     {
         public function __construct() {
-            // $this->var = $var;
+            parent::__construct();
         }
         public function home($params)
         {

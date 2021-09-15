@@ -1,6 +1,6 @@
 <?php 
     class MyConnection{
-        private $connect;
+        private \PDO $connect;
 
         public function __construct() {
             $connectionString = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";.DB_CHARSET.";
@@ -11,7 +11,7 @@
                 echo "ERROR: ". $e->getMessage();
             }
         }
-        
+
         function connect(){
             return $this->connect;
         }

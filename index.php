@@ -1,10 +1,10 @@
 <?php
     require_once("Config/Config.php");
 
-    $url = !empty($_GET['url']) ? $_GET['url'] : 'Home/home' ;
+    $url = !empty($_GET['url']) ? $_GET['url'] : 'home/home' ;
     $arrUrl= explode("/", $url);
 
-    $controller = $arrUrl[0];
+    $controller = ucwords($arrUrl[0]);
     $method = $arrUrl[0];
     $params = "";
 
@@ -44,7 +44,7 @@
         if (method_exists($controller, $method)) {
             $controller->{$method}($params);
         }else {
-            echo "Method not exists";
+            echo " <pre>Method not exists</pre>";
         }
     }else {
         echo "<strong> ... Controller not found</strong></br>";

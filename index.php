@@ -9,13 +9,11 @@
     $params = "";
 
     if (!empty($arrUrl[1])) {
-        # code...
         if ($arrUrl[1] != "") {
             # code.julio/100..
             $method = $arrUrl[1];
         }
     }
-    
 
     // print_r($arrUrl);
 
@@ -27,29 +25,10 @@
             $params = trim($params, ",");
             // echo $params;
         }
-    }
-    spl_autoload_register(function ($clase){
-        # code...
-        if (file_exists(LIBS."Core/".$clase.".php")) {
-            require_once(LIBS."Core/".$clase.".php");
-        }
-    });
+    }    
 
-    // Load
-    $controllerFile = "Controllers/".$controller.".php";
-    // echo $controllerFile;
-    if (file_exists($controllerFile)) {
-        require_once($controllerFile);
-        $controller = new $controller();
-        if (method_exists($controller, $method)) {
-            $controller->{$method}($params);
-        }else {
-            echo " <pre>Method not exists</pre>";
-        }
-    }else {
-        echo "<strong> ... Controller not found</strong></br>";
-    }
-
+    require_once("Libraries/Core/Autoload.php");
+    require_once("Libraries/Core/Load.php");
     // echo "<br>";
     // echo "Controller: ". $controller;
     // echo "<br>";

@@ -2,6 +2,7 @@
     class Controllers
     {
         public function __construct() {
+            $this->views = new Views();
             $this->loadModel();            
         }
 
@@ -15,5 +16,7 @@
                 $this->model = new $model();
             } 
         }
+
+       
     }
 ?>

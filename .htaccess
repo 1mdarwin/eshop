@@ -1,5 +1,9 @@
 Options All -Indexes
 RewriteEngine on
+<IfModule mod_speling.c>    
+    CheckSpelling on    
+</IfModule>
+
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

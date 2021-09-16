@@ -5,7 +5,8 @@
     $url = !empty($_GET['url']) ? $_GET['url'] : 'home/home' ;
     $arrUrl= explode("/", $url);
 
-    $controller = ucwords($arrUrl[0]);
+    // $controller = ucwords($arrUrl[0]);
+    $controller = $arrUrl[0];
     $method = $arrUrl[0];
     $params = "";
 

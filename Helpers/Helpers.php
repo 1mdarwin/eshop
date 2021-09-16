@@ -1,17 +1,21 @@
 <?php
     
     // Get the path of the website
-    function base_url()
-    {
+    function base_url(){
         return BASE_URL;
+    }
+    // Get path for media
+    function media(){
+        return BASE_URL."/Assets";
     }
     // Depuring function
     function dep($data){
-        print_r("<pre>");
-        print_r($data);
-        print_r("</pre>");
+        $format  = print_r("<pre>");
+        $format .= print_r($data);
+        $format .= print_r("</pre>");
+        return $format;
     }
-
+    // Security for avoid sql injection
     function strClean($strCadena){
         $string = preg_replace(['/\s+/','/^\s|\s$/'],[' ',''],$strCadena);
         $string = trim($string); // Delete space at the begin and the end of the string
@@ -51,7 +55,7 @@
         return $pass;
 
     }
-
+    // Generate token
     function token(){
         $r1 = bin2hex(random_bytes(10));
         $r2 = bin2hex(random_bytes(10));

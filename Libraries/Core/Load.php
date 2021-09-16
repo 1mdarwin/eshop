@@ -1,5 +1,6 @@
 <?php 
     // Load
+    $controller = ucwords($controller); // Capitalize the word    
     $controllerFile = "Controllers/".$controller.".php";
     // echo $controllerFile;
     if (file_exists($controllerFile)) {

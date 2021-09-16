@@ -14,8 +14,6 @@
 
         function connect(){
             return $this->connect;
-        }
-
-        
+        }        
     }
 ?>

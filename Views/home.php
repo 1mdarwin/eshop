@@ -8,9 +8,5 @@
 </head>
 <body>
     <h1><?php echo $data['page_title']; ?></h1>
-    <section id="<?php echo $data['tag_page']; ?> ">
-        <?php print_r($data); ?>
-    </section>
-    <?php echo token(); ?>
 </body>
 </html>

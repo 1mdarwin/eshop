@@ -8,12 +8,26 @@
     function media(){
         return BASE_URL."/Assets";
     }
+    function headerAdmin($data =""){
+        $view_header = "Views/Template/header_admin.php";
+        // return $view_header;
+        require_once($view_header);
+    }
+    function footerAdmin($data =""){
+        $view_footer = "Views/Template/footer_admin.php";
+        require_once($view_footer);
+    }
     // Depuring function
     function dep($data){
         $format  = print_r("<pre>");
         $format .= print_r($data);
         $format .= print_r("</pre>");
         return $format;
+    }
+
+    function getModal(string $nameModal, $data){
+        $view_modal = "Views/Template/Modals/{$nameModal}.php";
+        require_once($view_modal);
     }
     // Security for avoid sql injection
     function strClean($strCadena){

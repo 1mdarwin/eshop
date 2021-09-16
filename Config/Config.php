@@ -1,5 +1,6 @@
 <?php 
-    const BASE_URL = "http://localhost/eshop";    
+    //const BASE_URL = "http://localhost/eshop";
+    const BASE_URL = "http://eshop.local.drw";    
 
     date_default_timezone_set('America/Lima');
     

@@ -1,6 +1,6 @@
 <?php 
     class MyConnection{
-        private \PDO $connect;
+        private $connect;
 
         public function __construct() {
             $connectionString = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";.DB_CHARSET.";

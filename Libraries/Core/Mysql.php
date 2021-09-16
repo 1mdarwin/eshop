@@ -1,7 +1,7 @@
 <?php 
     class Mysql extends MyConnection
     {
-        private \PDO $connection;
+        private $connection;
         private $strQuery;
         private $arrValues;
 
@@ -10,7 +10,7 @@
          */
         public function __construct() {
             $this->connection = new MyConnection();
-            // $this->connection = $this->connection->connect();
+            $this->connection = $this->connection->connect();
         }
 
         public function insert(string $query, array $arrvalues)

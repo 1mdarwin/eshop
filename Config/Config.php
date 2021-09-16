@@ -2,6 +2,8 @@
     const BASE_URL = "http://localhost/eshop";
     // const LIBS = "Libraries/";
     // const VIEWS = "Views/";
+
+    date_default_timezone_set('America/Lima');
     
     // DB Connection
     const DB_HOST = "localhost";
@@ -9,5 +11,12 @@
     const DB_USER = "drw";
     const DB_PASS = "secret";
     const DB_CHARSET = "chartset=utf8";
+
+    // Delimiters for numbers
+    const SPD = ".";
+    const SPM = ",";
+
+    // Currency
+    const SMONEY="$";
 
 ?>

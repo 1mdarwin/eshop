@@ -7,6 +7,9 @@
     <script src="<?= media(); ?>/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <script src="<?= media(); ?>/js/functions_admin.js"></script>
-    <script src="<?= media(); ?>/js/functions_roles.js"></script>
+    <?php if ($data['page_tag' == 'user_rols']){?>
+      <script src="<?= media(); ?>/js/functions_roles.js"></script>
+    <?php } ?>
+    <script src="<?= media(); ?>/js/functions_users.js"></script>
   </body>
 </html>

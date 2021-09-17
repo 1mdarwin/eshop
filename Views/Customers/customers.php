@@ -1,6 +1,6 @@
 <?php 
     headerAdmin($data); 
-    getModal("modalUsers",$data);
+    getModal("modalCustomers",$data);
 ?>
     
     <main class="app-content">
@@ -12,7 +12,7 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a href="<?= base_url(); ?>/users"><?= $data['page_title']; ?></a></li>
+          <li class="breadcrumb-item"><a href="<?= base_url(); ?>/customers"><?= $data['page_title']; ?></a></li>
         </ul>
       </div>
       <div class="row">

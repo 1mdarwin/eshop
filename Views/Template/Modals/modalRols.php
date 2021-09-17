@@ -13,7 +13,7 @@
                 <form id="formRol" name="formRol">
                     <div class="form-group">
                         <label class="control-label">Name</label>
-                        <input class="form-control" id="txtName" name=""txtName type="text" placeholder="Rol's Name" required="">
+                        <input class="form-control" id="txtName" name="txtName" type="text" placeholder="Rol's Name" required="">
                     </div>                    
                     <div class="form-group">
                         <label class="control-label">Description</label>
@@ -26,13 +26,7 @@
                             <option value="2">Disable</option>                            
                         </select>
                     </div>
-                    <div class="form-group">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox">I accept the terms and conditions
-                        </label>
-                    </div>
-                    </div>
+                   
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit">
                           <i class="fa fa-fw fa-lg fa-check-circle"></i>Save
@@ -43,11 +37,7 @@
                 </form>
                 </div>
           </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      </div>      
     </div>
   </div>
 </div>

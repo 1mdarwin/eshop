@@ -16,6 +16,7 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
           <ul class="treeview-menu">            
+            <li><a class="treeview-item" href="<?= base_url()?>/users"><i class="icon fa fa-circle-o"></i> Users</a></li>
             <li><a class="treeview-item" href="<?= base_url()?>/rols"><i class="icon fa fa-circle-o"></i> Rols</a></li>
             <li><a class="treeview-item" href="<?= base_url()?>/permissions"><i class="icon fa fa-key"  aria-hidden="true"></i> Permissions</a></li>
           </ul>

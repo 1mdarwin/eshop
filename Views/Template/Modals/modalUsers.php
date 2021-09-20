@@ -40,9 +40,9 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="listRol">Rol</label>
-                    <select class="form-control" id="listRolid" name="listRolid" required="">
-                        <option value="1">Administrator</option>
-                        <option value="2">Normal</option>                            
+                    <select class="selectpicker form-control" id="listRolid" name="listRolid" required="">
+                        <!-- <option value="1">Administrator</option>
+                        <option value="2">Normal</option> -->
                     </select>
                 </div>
                 <div class="form-group col-md-6">

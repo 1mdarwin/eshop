@@ -12,5 +12,10 @@ class Rols extends Controllers
         $data['page_title'] = "User Rols";
         $this->views->getView($this, "rols", $data);
     }
+
+    public function getSelectRols(){
+        $result = $this->model->getAllRols();
+        echo $result;
+    }
 }
 ?>

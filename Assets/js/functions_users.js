@@ -28,10 +28,7 @@ document.addEventListener("DOMContentLoaded",function(){
         ],
         'dom': '1Bfrtip',
         // 'dom': 'Bfrtip',
-        'buttons': [
-            'pdf',
-            'excel',
-            'print'
+        'buttons': [            
             // {
             //     "extend":"copyHtml5",
             //     "text":"<i class='fa fa-docs'></i>Copy",
@@ -189,13 +186,16 @@ window.addEventListener('load',function(){
 }, false);
 function fntUserRols(){
     if (document.querySelector('#listRolid')) {
-        var ajaxUrl = base_url+'Roles/getSelectRoles';            
+        var ajaxUrl = base_url+'/Rols/getSelectRols';            
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
         request.open("GET",ajaxUrl,true);
         request.send();
         request.onreadystatechange = function(){
             if(request.readyState == 4 && request.status == 200){
-                document.querySelector('#listRolid').innerHTML = request.respondText;
+                document.querySelector('#listRolid').innerHTML = request.responseText.rolName;
+                // console.log(request);
+                var json = JSON.parse(request.responseText);
+                console.log(json.idRol);
                 $('#listRolid').selectpicker('render');
             }
         }            

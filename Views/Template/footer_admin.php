@@ -2,6 +2,7 @@
     <script src="<?= media(); ?>/js/jquery-3.3.1.min.js"></script>
     <script src="<?= media(); ?>/js/popper.min.js"></script>
     <script src="<?= media(); ?>/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="<?= media(); ?>/js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
     <script src="<?= media(); ?>/js/plugins/pace.min.js"></script>

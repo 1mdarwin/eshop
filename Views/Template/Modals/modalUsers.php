@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header headerRegister">
-        <h5 class="modal-title" id="exampleModalCenterTitle">New User</h5>
+        <h5 class="modal-title" id="titleModal">New User</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -40,7 +40,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="listRol">Rol</label>
-                    <select class="form-control" id="listRol" name="listRol" required="">
+                    <select class="form-control" id="listRolid" name="listRolid" required="">
                         <option value="1">Administrator</option>
                         <option value="2">Normal</option>                            
                     </select>
@@ -67,6 +67,7 @@
                     <i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
             </div>
         </form>
+        <div id="divLoading" class="spinner-border">Loading</div>
                 
       </div>      
     </div>

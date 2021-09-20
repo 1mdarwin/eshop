@@ -9,6 +9,9 @@
     <title><?= $data['page_tag']; ?></title>
     <!-- Main CSS-->
     <link rel="shortcut icon" href="<?= media();?>/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.2/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css"/>
     <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/main.css">
     <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/style.css">
     <!-- Font-icon css-->

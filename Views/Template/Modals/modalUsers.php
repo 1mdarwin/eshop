@@ -40,7 +40,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="listRol">Rol</label>
-                    <select class="selectpicker form-control" id="listRolid" name="listRolid" required="">
+                    <select class="form-control" id="listRolid" name="listRolid" required="">
                         <!-- <option value="1">Administrator</option>
                         <option value="2">Normal</option> -->
                     </select>
@@ -63,11 +63,14 @@
                 <button class="btn btn-primary" type="submit" id="btnActionForm">
                     <i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Save</span>
                 </button>
-                &nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#">
-                    <i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                <i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Cancel</span>
+                </button>
+                &nbsp;&nbsp;&nbsp;<!--<a class="btn btn-secondary" href="#">
+                    <i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
             </div>
         </form>
-        <div id="divLoading" class="spinner-border">Loading</div>
+        <div id="divLoading" class="">Loading</div>
                 
       </div>      
     </div>

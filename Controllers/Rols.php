@@ -15,7 +15,11 @@ class Rols extends Controllers
 
     public function getSelectRols(){
         $result = $this->model->getAllRols();
-        echo $result;
+        $htmlRol = '';
+        foreach($result as $rol){
+            $htmlRol .= '<option value='.$rol['idRol'].'>'.$rol['rolName'].'</option>';
+        }
+        echo $htmlRol;        
     }
 }
 ?>

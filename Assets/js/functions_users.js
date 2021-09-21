@@ -4,7 +4,7 @@ var base_url = window.location.origin;
 
 
 document.addEventListener("DOMContentLoaded",function(){ 
-    swal("Error","Ingreso","error");       
+    // swal("Error","Ingreso","error");       
     tableUsers = $("#tableUsers").dataTable({
         "aProcessing":true,
         "aServerSide":true,
@@ -27,29 +27,28 @@ document.addEventListener("DOMContentLoaded",function(){
             {"data":"options"},
         ],
         'dom': '1Bfrtip',
-        // 'dom': 'Bfrtip',
         'buttons': [            
-            // {
-            //     "extend":"copyHtml5",
-            //     "text":"<i class='fa fa-docs'></i>Copy",
-            //     "titleAttr": "Copy",
-            //     "className": "btn btn-secondary",                
-            // },{
-            //     "extend":"excelHtml5",
-            //     "text":"<i class='fa fa-file-excel'></i>Excel",
-            //     "titleAttr": "Export to Excel",
-            //     "className": "btn btn-success",
-            // },{
-            //     "extend":"pdfHtml5",
-            //     "text":"<i class='fa fa-file-pdf'></i>PDF",
-            //     "titleAttr": "Export to PDF",
-            //     "className": "btn btn-danger",
-            // },{
-            //     "extend":"csvHtml5",
-            //     "text":"<i class='fa fa-file-csv'></i>CSV",
-            //     "titleAttr": "Export to CSV",
-            //     "className": "btn btn-info",
-            // }
+            {
+                "extend":"copyHtml5",
+                "text":"<i class='fa fa-docs'></i>Copy",
+                "titleAttr": "Copy",
+                "className": "btn btn-secondary",                
+            },{
+                "extend":"excelHtml5",
+                "text":"<i class='fa fa-file-excel'></i>Excel",
+                "titleAttr": "Export to Excel",
+                "className": "btn btn-success",
+            },{
+                "extend":"pdfHtml5",
+                "text":"<i class='fa fa-file-pdf'></i>PDF",
+                "titleAttr": "Export to PDF",
+                "className": "btn btn-danger",
+            },{
+                "extend":"csvHtml5",
+                "text":"<i class='fa fa-file-csv'></i>CSV",
+                "titleAttr": "Export to CSV",
+                "className": "btn btn-info",
+            }
         ],
         "resonsieve":true,
         "bDestroy": true,
@@ -58,8 +57,7 @@ document.addEventListener("DOMContentLoaded",function(){
     });
     if(document.querySelector("#formUser")){        
         var formUser = document.querySelector("#formUser");        
-        formUser.onsubmit = function (e){
-            console.log("hizo clic");
+        formUser.onsubmit = function (e){            
             e.preventDefault();
             var strIdentification = document.querySelector("#txtIdentification").value;
             var strFirstName = document.querySelector("#txtFirstName").value;
@@ -80,15 +78,19 @@ document.addEventListener("DOMContentLoaded",function(){
                 }
             }
             divLoading.style.display = "flex";
-            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-            console.log($request);
-            var ajaxUrl = base_url + "/Users/setUser";
+            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");            
+            var ajaxUrl = base_url + "/Users/getUsers";
             var formData = new FormData(formUser);
+            console.log(strFirstName);
+            console.log(formUser);
+            console.log(formData);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
             request.onreadystatechange = function(){
                 if(request.readyState == 4 && request.status == 200){
+                    console.log(request);
                     var objData = JSON.parse(request.respondText);
+                    console.log(objData);
                     if(objData.status){
                         $('#modalFormUser').modal('hide');
                         formUser.reset();
@@ -191,11 +193,8 @@ function fntUserRols(){
         request.open("GET",ajaxUrl,true);
         request.send();
         request.onreadystatechange = function(){
-            if(request.readyState == 4 && request.status == 200){
-                document.querySelector('#listRolid').innerHTML = request.responseText.rolName;
-                // console.log(request);
-                var json = JSON.parse(request.responseText);
-                console.log(json.idRol);
+            if(request.readyState == 4 && request.status == 200){                
+                document.querySelector('#listRolid').innerHTML = request.responseText;
                 $('#listRolid').selectpicker('render');
             }
         }            
@@ -208,6 +207,94 @@ function fntViewUser(idPerson){
     var ajaxUrl = base_url+'Users/getUser'+idPerson;
     request.open("GET",ajaxUrl,true);
     request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){                
+            var objData = JSON.parse(request.responseText);
+            if(objData.status){
+                var userStatus = objData.data.status == 1 ?
+                '<span class="badge badge-success">Enabled</span>' :
+                '<span class="badge badge-danger">Disabled</span>';
+
+                document.querySelector('#celIdentification').innerHTML = objData.data.identification;
+                document.querySelector('#celFirstName').innerHTML = objData.data.firstName;
+                document.querySelector('#celLastName').innerHTML = objData.data.lastName;
+                document.querySelector('#celTelephone').innerHTML = objData.data.telephone;
+                document.querySelector('#celEmail').innerHTML = objData.data.email;
+                document.querySelector('#celUserType').innerHTML = objData.data.userType;
+                document.querySelector('#celStatus').innerHTML = objData.data.status;
+                document.querySelector('#celCreated').innerHTML = objData.data.created;
+                $('#modalViewUser').modal('show');
+            }else{
+                swal("Error", objData.msg, "error");
+            }
+        }
+    }
+}
+function fntEditUser(idPerson){
+    document.querySelector('#titleModal').innerHTML = "Update User";
+    document.querySelector('.modal-header').classList.replace("headerRegister","headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-primary","btn-info");
+    document.querySelector('#btnText').innerHTML = "Update";
+    var idPerson = idPerson;
+    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : ActiveXObject('Microsoft.XMLHTTP');
+    var ajaxUrl = base_url+'/User/getUser/'+idPerson;
+    request.open('GET',ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            var objData = JSON.parse(request.responseText);
+            if(objData.status){
+                document.querySelector('#idUser').value = objData.data.idPerson;
+                document.querySelector('#txtIdentification').value = objData.data.idPerson;
+                document.querySelector('#txtFirstName').value = objData.data.idPerson;
+                document.querySelector('#txtLastName').value = objData.data.idPerson;
+                document.querySelector('#txtTelephone').value = objData.data.idPerson;
+                document.querySelector('#txtEmail').value = objData.data.idPerson;
+                document.querySelector('#listRolid').value = objData.data.idPerson;
+                $('#listRolid').selectpicker('render');
+
+                if(objData.data.status == 1){
+                    document.querySelector('#listStatus').value = 1;
+                }else{
+                    document.querySelector('#listStatus').value = 2;
+                }
+                $('#listStatus').selectpicker('render');
+            }
+        }
+        $('#modalFormUser').modal('show');
+    }
+}
+
+function fntDelUser(idPerson){
+    var idPerson = idPerson;
+    swal({
+        title: "Delete user",
+        text: '',
+        type: '',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete',
+        cancelButtonText: 'No, cancel',
+        closeOnConfirm: false,
+        closeOnCancel: true,
+    }, function (isConfirm){
+        if(isConfirm){
+            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : ActiveXObject('Microsoft.XMLHTTP');
+            var ajaxUrl = base_url+'/User/delUser';
+            var strData = 'idUser='+idPerson;
+            request.open('POST',ajaxUrl,true);
+            request.selectRequestHeader("Content-type","application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                var objData = JSON.parse(request.responseText);
+                if(objData.status){
+                    swal("Delete",objData.msg, "success");
+                    tableUsers.api().ajax.reload();
+                }else{
+                    swal("Atention!",objData.msg,"error");
+                }
+            }
+        }
+    });
 }
 
 function openModal(){
@@ -218,4 +305,8 @@ function openModal(){
     document.querySelector('#titleModal').innerHTML = "New User";    
     document.querySelector('#formUser').reset();
     $('#modalFormUser').modal('show');
+}
+
+function openModelProfile(){
+    $('#modalFormProfile').modal('show');
 }

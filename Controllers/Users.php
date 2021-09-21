@@ -12,6 +12,12 @@ class Users extends Controllers
         $data['page_title'] = "Users";
         $this->views->getView($this, "users", $data);
     }
+    
+    public function setUser(){
+        //$result = $this->model->getAllUsers();
+        echo $result = "Hello World";
+    }
+
     public function getUsers(){
         $result = $this->model->getAllUsers();
         echo $result;

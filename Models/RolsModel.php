@@ -8,7 +8,7 @@
         public function getAllRols(){
             $sql = "SELECT idRol, rolName FROM rol";
             $result = $this->select_all($sql);
-            $result = json_encode($result);
+            // $result = json_encode($result);            
             return $result;
         }       
         

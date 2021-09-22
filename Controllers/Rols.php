@@ -10,9 +10,12 @@ class Rols extends Controllers
         $data['page_tag'] = "rols";
         $data['page_name'] = "user_rols";
         $data['page_title'] = "User Rols";
+        $data['page_functions_js'] = "functions_rols.js";
         $this->views->getView($this, "rols", $data);
     }
-
+    /**
+     * Get rols from databases and show them into HTML <option></option>
+     */
     public function getSelectRols(){
         $result = $this->model->getAllRols();
         $htmlRol = '';

@@ -13,8 +13,7 @@
             $this->connection = $this->connection->connect();
         }
 
-        public function insert(string $query, array $arrvalues)
-        {
+        public function insert(string $query, array $arrvalues){
             $this->strQuery = $query;
             $this->arrValues = $arrvalues;
             $insert = $this->connection->prepare($this->strQuery);

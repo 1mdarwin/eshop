@@ -17,14 +17,19 @@ document.addEventListener("DOMContentLoaded",function(){
             "dataSrc":''
         },
         "columns":[
-            {"data":"id"},
+            {"data":"idperson"},
             {"data":"firstname"},
             {"data":"lastname"},
-            {"data":"email"},
+            {"data":"emailperson"},
             {"data":"telephone"},
-            {"data":"rolname"},
-            {"data":"status"},
-            {"data":"options"},
+            {"data":"idrol"},
+            {"data":"statusperson"},
+            {
+                data: null,
+                defaultContent: '<i class="fa fa-pencil" onclick="fntEditUser()"/> <i class="fa fa-trash"/>',
+                className: 'row-edit dt-center',
+                orderable: false
+            },
         ],
         'dom': '1Bfrtip',
         'buttons': [            
@@ -79,25 +84,20 @@ document.addEventListener("DOMContentLoaded",function(){
             }
             divLoading.style.display = "flex";
             var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");            
-            var ajaxUrl = base_url + "/Users/getUsers";
+            var ajaxUrl = base_url + "/Users/setUser";
             var formData = new FormData(formUser);
-            console.log(strFirstName);
-            console.log(formUser);
-            console.log(formData);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
             request.onreadystatechange = function(){
                 if(request.readyState == 4 && request.status == 200){
-                    console.log(request);
-                    var objData = JSON.parse(request.respondText);
-                    console.log(objData);
+                    var objData = JSON.parse(request.responseText);                    
                     if(objData.status){
-                        $('#modalFormUser').modal('hide');
+                        $('#modalFormUser').modal('hide'); // Hide modal form
                         formUser.reset();
                         swal("Users",objData.msg, "success");
-                        tableUsers.api().ajax.reload();
+                        tableUsers.api().ajax.reload(); // Refresh table
                     }else{
-                        swal("Error",objData.msg, "error");
+                        swal("Error","Failed", "error");
                     }
                 }
                 divLoading.style.display = 'none';
@@ -190,7 +190,7 @@ function fntUserRols(){
     if (document.querySelector('#listRolid')) {
         var ajaxUrl = base_url+'/Rols/getSelectRols';            
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-        request.open("GET",ajaxUrl,true);
+        request.open("GET", ajaxUrl, true);
         request.send();
         request.onreadystatechange = function(){
             if(request.readyState == 4 && request.status == 200){                
@@ -230,7 +230,7 @@ function fntViewUser(idPerson){
         }
     }
 }
-function fntEditUser(idPerson){
+function fntEditUser(idPerson=1){
     document.querySelector('#titleModal').innerHTML = "Update User";
     document.querySelector('.modal-header').classList.replace("headerRegister","headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary","btn-info");
@@ -244,16 +244,16 @@ function fntEditUser(idPerson){
         if(request.readyState == 4 && request.status == 200){
             var objData = JSON.parse(request.responseText);
             if(objData.status){
-                document.querySelector('#idUser').value = objData.data.idPerson;
-                document.querySelector('#txtIdentification').value = objData.data.idPerson;
-                document.querySelector('#txtFirstName').value = objData.data.idPerson;
-                document.querySelector('#txtLastName').value = objData.data.idPerson;
-                document.querySelector('#txtTelephone').value = objData.data.idPerson;
-                document.querySelector('#txtEmail').value = objData.data.idPerson;
-                document.querySelector('#listRolid').value = objData.data.idPerson;
+                document.querySelector('#idUser').value = objData.data.idperson;
+                document.querySelector('#txtIdentification').value = objData.data.identification;
+                document.querySelector('#txtFirstName').value = objData.data.firstname;
+                document.querySelector('#txtLastName').value = objData.data.lastname;
+                document.querySelector('#txtTelephone').value = objData.data.telephone;
+                document.querySelector('#txtEmail').value = objData.data.emailperson;
+                document.querySelector('#listRolid').value = objData.data.idrol;
                 $('#listRolid').selectpicker('render');
 
-                if(objData.data.status == 1){
+                if(objData.data.statusperson == 1){
                     document.querySelector('#listStatus').value = 1;
                 }else{
                     document.querySelector('#listStatus').value = 2;

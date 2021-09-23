@@ -7,8 +7,7 @@ class Users extends Controllers
     /**
      * Show User view with some parameters
      */
-    public function Users()
-    {
+    public function Users(){
         $data['page_id'] = 4;
         $data['page_tag'] = "users";
         $data['page_name'] = "users";
@@ -56,6 +55,15 @@ class Users extends Controllers
      */
     public function getUsers(){
         $result = $this->model->getAllUsers();
+        $result = json_encode($result);
+        echo $result;
+    }
+    /**
+     * Get user data for update
+     */
+    public function getUser(){
+        $id = 1;
+        $result = $this->model->getUser($id);
         $result = json_encode($result);
         echo $result;
     }

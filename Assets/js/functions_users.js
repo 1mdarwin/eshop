@@ -237,12 +237,13 @@ function fntEditUser(idPerson=1){
     document.querySelector('#btnText').innerHTML = "Update";
     var idPerson = idPerson;
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url+'/User/getUser/'+idPerson;
+    var ajaxUrl = base_url+'/Users/getUser/'+idPerson;
     request.open('GET',ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
             var objData = JSON.parse(request.responseText);
+            console.log(objData);
             if(objData.status){
                 document.querySelector('#idUser').value = objData.data.idperson;
                 document.querySelector('#txtIdentification').value = objData.data.identification;
@@ -279,7 +280,7 @@ function fntDelUser(idPerson){
     }, function (isConfirm){
         if(isConfirm){
             var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : ActiveXObject('Microsoft.XMLHTTP');
-            var ajaxUrl = base_url+'/User/delUser';
+            var ajaxUrl = base_url+'/Users/delUser';
             var strData = 'idUser='+idPerson;
             request.open('POST',ajaxUrl,true);
             request.selectRequestHeader("Content-type","application/x-www-form-urlencoded");

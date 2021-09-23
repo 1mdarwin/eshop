@@ -17,6 +17,13 @@
             $result = $this->insert($sql, $arrData);
             return $result;
         }
+
+        public function getUser($idperson)
+        {
+            $sql = "SELECT * FROM person where idperson=$idperson";
+            $result = $this->select($sql);
+            return $result;
+        }
         
     }
 ?>

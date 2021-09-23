@@ -17,10 +17,23 @@
             $result = $this->insert($sql, $arrData);
             return $result;
         }
-
+        /**
+         * Edit user from table person
+         * @param idperson
+         */
         public function getUser($idperson)
         {
             $sql = "SELECT * FROM person where idperson=$idperson";
+            $result = $this->select($sql);
+            return $result;
+        }
+        /**
+         * Delete user from table person
+         * @param idperson
+         */
+        public function deleteUser($idperson)
+        {
+            $sql = "DELETE person where idperson=$idperson";
             $result = $this->select($sql);
             return $result;
         }

@@ -1,4 +1,5 @@
 <?php 
+
 class Users extends Controllers
 {
     public function __construct() {
@@ -55,17 +56,46 @@ class Users extends Controllers
      */
     public function getUsers(){
         $result = $this->model->getAllUsers();
-        $result = json_encode($result);
+        // $result['options'] = '<i class="fa fa-pencil" onclick="fntEditUser(1)"/>';
+        for($i=0;$i<sizeof($result);$i++){
+            $result[$i]['options'] = '<i class="fa fa-pencil" onclick="fntEditUser('. $result[$i]['idperson'] .')" />';
+            $result[$i]['options'] .= '&nbsp;&nbsp;<i class="fa fa-trash" onclick="fntDelUser('. $result[$i]['idperson'] .')" />';            
+        }
+        $result = json_encode($result, JSON_HEX_QUOT | JSON_HEX_TAG); // Allos to tags and quotation sign              
         echo $result;
     }
     /**
      * Get user data for update
+     * @param $params is got from URL from Controller that split urlpath
+     * @return $result like JSON with multi objects
      */
-    public function getUser(){
-        $id = 1;
-        $result = $this->model->getUser($id);
-        $result = json_encode($result);
+    public function getUser($params){
+        $resjson = [];
+        $result = $this->model->getUser($params);
+        $resjson['data'] = $result;
+        if ($result){
+            $resjson['status'] = "TRUE";
+        }else{
+            $resjson['status'] = "FALSE";
+        }
+        $result = json_encode($resjson);
         echo $result;
+    }
+    public function delUser($params)
+    {
+        echo $params;
+        $result = $this->model->deleteUser($params);        
+        if ($result){
+            echo $result = '{
+                "msg": "Successful user deleted",
+                "status":"TRUE"
+            }';
+        }else{
+            echo $result = '{
+                "msg": "Failed to delete User",
+                "status":"FALSE"
+            }';
+        }
     }
 }
 ?>

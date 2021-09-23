@@ -24,12 +24,7 @@ document.addEventListener("DOMContentLoaded",function(){
             {"data":"telephone"},
             {"data":"idrol"},
             {"data":"statusperson"},
-            {
-                data: null,
-                defaultContent: '<i class="fa fa-pencil" onclick="fntEditUser()"/> <i class="fa fa-trash"/>',
-                className: 'row-edit dt-center',
-                orderable: false
-            },
+            {"data":"options"},
         ],
         'dom': '1Bfrtip',
         'buttons': [            
@@ -230,7 +225,7 @@ function fntViewUser(idPerson){
         }
     }
 }
-function fntEditUser(idPerson=1){
+function fntEditUser(idPerson){    
     document.querySelector('#titleModal').innerHTML = "Update User";
     document.querySelector('.modal-header').classList.replace("headerRegister","headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary","btn-info");
@@ -238,6 +233,7 @@ function fntEditUser(idPerson=1){
     var idPerson = idPerson;
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : ActiveXObject('Microsoft.XMLHTTP');
     var ajaxUrl = base_url+'/Users/getUser/'+idPerson;
+    console.log(ajaxUrl);
     request.open('GET',ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
@@ -267,24 +263,25 @@ function fntEditUser(idPerson=1){
 }
 
 function fntDelUser(idPerson){
-    var idPerson = idPerson;
+    var idPerson = idPerson;    
     swal({
         title: "Delete user",
-        text: '',
-        type: '',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete',
-        cancelButtonText: 'No, cancel',
-        closeOnConfirm: false,
-        closeOnCancel: true,
-    }, function (isConfirm){
+        text: "You will not be able to recover this record!",
+        icon: "warning",
+        buttons: [
+            'No, cancel it!',
+            'Yes, I am sure!'
+        ],
+        dangerMode: true,
+    }).then((isConfirm) => {
         if(isConfirm){
             var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : ActiveXObject('Microsoft.XMLHTTP');
             var ajaxUrl = base_url+'/Users/delUser';
             var strData = 'idUser='+idPerson;
             request.open('POST',ajaxUrl,true);
-            request.selectRequestHeader("Content-type","application/x-www-form-urlencoded");
+            request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             request.send(strData);
+            console.log(request)
             request.onreadystatechange = function(){
                 var objData = JSON.parse(request.responseText);
                 if(objData.status){

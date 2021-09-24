@@ -36,9 +36,12 @@ class Users extends Controllers
         $arrData[] = '';
         $arrData[] = '';
         $arrData[] = '';
-
-        array_shift($arrData); // Shift the first element from array
-        $result = $this->model->insertUser($arrData);        
+        if ($_POST['idUser'] == ""){
+            array_shift($arrData); // Shift the first element from array
+            $result = $this->model->insertUser($arrData);
+        }else{
+            $result = $this->model->updateUser($arrData);
+        }        
         if ($result){
             echo $result = '{
                 "msg": "Successful user insert",
@@ -56,10 +59,12 @@ class Users extends Controllers
      */
     public function getUsers(){
         $result = $this->model->getAllUsers();
+        
         // $result['options'] = '<i class="fa fa-pencil" onclick="fntEditUser(1)"/>';
         for($i=0;$i<sizeof($result);$i++){
-            $result[$i]['options'] = '<i class="fa fa-pencil" onclick="fntEditUser('. $result[$i]['idperson'] .')" />';
-            $result[$i]['options'] .= '&nbsp;&nbsp;<i class="fa fa-trash" onclick="fntDelUser('. $result[$i]['idperson'] .')" />';            
+            $idperson = $result[$i]['idperson'];
+            $result[$i]['options'] = '<i class="fa fa-pencil" onclick="fntEditUser('. $idperson .')" /></i>';
+            $result[$i]['options'] .= '&nbsp;&nbsp;<i class="fa fa-trash" onclick="fntDelUser('. $idperson .')" /></i>';            
         }
         $result = json_encode($result, JSON_HEX_QUOT | JSON_HEX_TAG); // Allos to tags and quotation sign              
         echo $result;
@@ -81,10 +86,10 @@ class Users extends Controllers
         $result = json_encode($resjson);
         echo $result;
     }
-    public function delUser($params)
+    public function delUser()
     {
-        echo $params;
-        $result = $this->model->deleteUser($params);        
+        $idperson = $_POST['idUser'];
+        $result = $this->model->deleteUser($idperson);        
         if ($result){
             echo $result = '{
                 "msg": "Successful user deleted",

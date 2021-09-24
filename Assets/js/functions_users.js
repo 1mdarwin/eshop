@@ -2,9 +2,8 @@ var tableUsers;
 var divLoading = document.querySelector("#divLoading");
 var base_url = window.location.origin;
 
-
 document.addEventListener("DOMContentLoaded",function(){ 
-    // swal("Error","Ingreso","error");       
+    swal("Error","DOMContentLoaded","error");       
     tableUsers = $("#tableUsers").dataTable({
         "aProcessing":true,
         "aServerSide":true,
@@ -85,7 +84,8 @@ document.addEventListener("DOMContentLoaded",function(){
             request.send(formData);
             request.onreadystatechange = function(){
                 if(request.readyState == 4 && request.status == 200){
-                    var objData = JSON.parse(request.responseText);                    
+                    var objData = JSON.parse(request.responseText);
+                    console.log("save operation");
                     if(objData.status){
                         $('#modalFormUser').modal('hide'); // Hide modal form
                         formUser.reset();
@@ -101,86 +101,88 @@ document.addEventListener("DOMContentLoaded",function(){
         } 
 
     }
-    // Update Profile
-    if(document.querySelector('#formProfile')){
-        var formProfile = document.querySelector('#formProfile');
-        formProfile.onSubmit = function(e){
-            e.preventDefault();
-            var strIdentification = document.querySelector("#txtIdentification").value;
-            var strFirstName = document.querySelector("#txtFirstName").value;
-            var strLastName = document.querySelector("#txtLastName").value;
-            var strEmail = document.querySelector("#txtEmail").value;
-            var strTelephone = document.querySelector("#txtTelephone").value;
-            var intTypeUser = document.querySelector("#listRolid").value;
-            var strPassword = document.querySelector("#txtPassword").value;
-            var strPasswordConfirm = document.querySelector("#txtPasswordConfirm").value;
-            if(strIdentification == '' || strFirstName == '' || strLastName == '' || strEmail == ''){
-                swal("Atention", "All fields are mandatory","error");
-                return false;
-            }
-            if(strPassword == '' || strPasswordConfirm == ''){
-                if(strPassword != strPasswordConfirm){
-                    swal("Atention", "Password not match","info");
-                    return false;
-                }
-                if(strPassword.length < 5){
-                    swal("Atention", "Password should has almost five characters","info");
-                    return false;
-                }
-                let elementsValid = document.getElementsByClassName("valid");
-                for (let i = 0; i < elementsValid.length; i++) {
-                    if (elementsValid[i].classList.contains('is-invalid')) {
-                        swal("Atention", "Please verify the red marks field","info");
-                        return false;
-                    }
-                }
-                divLoading.style.display = "flex";
-                var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-                var ajaxUrl = base_url + "/Users/setUser";
-                var formData = new FormData(formUser);
-                request.open("POST",ajaxUrl,true);
-                request.send(formData);
-                request.onreadystatechange = function(){
-                    if(request.readyState != 4) return;
-                    if(request.status == 200){
-                        var objData = JSON.parse(request.respondText);
-                        if(objData.status){
-                            $('#modalFormProfile').modal('hide');
-                            swal({
-                                title:"",
-                                text: objData.msg,
-                                type: "success",
-                                confirmButtonText: "Confirm",
-                                closeOnConfirm: false,
-                            },function(isConfirm){
-                                if(isConfirm){
-                                    location.reload();
-                                }
-                            });
-                        }else{
-                            swal("Error",objData.msg,"error");
-                        }
-                    }
-                    divLoading.style.display = "none";
-                    return false;
-                }
-            }
-        }
-    }
-    // Update fiscal data
-    if (document.querySelector('#formDataFiscal')) {
-        var formDataFiscal = document.querySelector('#formDataFiscal');
-        formDataFiscal.onSubmit = function(e){
-            e.preventDefault();
-            var strNit = document.querySelector('#formDataFiscal');
-
-        }
-    }
     
 }, false);
+// Update Profile
+if(document.querySelector('#formProfile')){
+    var formProfile = document.querySelector('#formProfile');
+    formProfile.onSubmit = function(e){
+        e.preventDefault();
+        var strIdentification = document.querySelector("#txtIdentification").value;
+        var strFirstName = document.querySelector("#txtFirstName").value;
+        var strLastName = document.querySelector("#txtLastName").value;
+        var strEmail = document.querySelector("#txtEmail").value;
+        var strTelephone = document.querySelector("#txtTelephone").value;
+        var intTypeUser = document.querySelector("#listRolid").value;
+        var strPassword = document.querySelector("#txtPassword").value;
+        var strPasswordConfirm = document.querySelector("#txtPasswordConfirm").value;
+        if(strIdentification == '' || strFirstName == '' || strLastName == '' || strEmail == ''){
+            swal("Atention", "All fields are mandatory","error");
+            return false;
+        }
+        if(strPassword == '' || strPasswordConfirm == ''){
+            if(strPassword != strPasswordConfirm){
+                swal("Atention", "Password not match","info");
+                return false;
+            }
+            if(strPassword.length < 5){
+                swal("Atention", "Password should has almost five characters","info");
+                return false;
+            }
+            let elementsValid = document.getElementsByClassName("valid");
+            for (let i = 0; i < elementsValid.length; i++) {
+                if (elementsValid[i].classList.contains('is-invalid')) {
+                    swal("Atention", "Please verify the red marks field","info");
+                    return false;
+                }
+            }
+            divLoading.style.display = "flex";
+            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            var ajaxUrl = base_url + "/Users/setUser";
+            var formData = new FormData(formUser);
+            request.open("POST",ajaxUrl,true);
+            request.send(formData);
+            request.onreadystatechange = function(){
+                if(request.readyState != 4) return;
+                if(request.status == 200){
+                    var objData = JSON.parse(request.respondText);
+                    if(objData.status){
+                        $('#modalFormProfile').modal('hide');
+                        swal({
+                            title:"",
+                            text: objData.msg,
+                            type: "success",
+                            confirmButtonText: "Confirm",
+                            closeOnConfirm: false,
+                        },function(isConfirm){
+                            if(isConfirm){
+                                location.reload();
+                            }
+                        });
+                    }else{
+                        swal("Error",objData.msg,"error");
+                    }
+                }
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+// Update fiscal data
+if (document.querySelector('#formDataFiscal')) {
+    var formDataFiscal = document.querySelector('#formDataFiscal');
+    formDataFiscal.onSubmit = function(e){
+        e.preventDefault();
+        var strNit = document.querySelector('#formDataFiscal');
+
+    }
+}
+
 window.addEventListener('load',function(){
     fntUserRols();
 }, false);
+
 function fntUserRols(){
     if (document.querySelector('#listRolid')) {
         var ajaxUrl = base_url+'/Rols/getSelectRols';            
@@ -263,7 +265,8 @@ function fntEditUser(idPerson){
 }
 
 function fntDelUser(idPerson){
-    var idPerson = idPerson;    
+    var idPerson = idPerson;
+    console.log("listo para borrar - dentro de fntDelUser")    
     swal({
         title: "Delete user",
         text: "You will not be able to recover this record!",
@@ -280,15 +283,17 @@ function fntDelUser(idPerson){
             var strData = 'idUser='+idPerson;
             request.open('POST',ajaxUrl,true);
             request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            request.send(strData);
-            console.log(request)
+            request.send(strData);            
             request.onreadystatechange = function(){
                 var objData = JSON.parse(request.responseText);
+                console.log(objData);
                 if(objData.status){
                     swal("Delete",objData.msg, "success");
                     tableUsers.api().ajax.reload();
+                    console.log("Ingreso satisfactorio");
                 }else{
                     swal("Atention!",objData.msg,"error");
+                    console.log("fallo el mensaje de error");
                 }
             }
         }

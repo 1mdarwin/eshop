@@ -39,7 +39,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="listRol">Rol</label>
+                    <label for="listRolid">Rol</label>
                     <select class="form-control" id="listRolid" name="listRolid" required="">
                         <!-- <option value="1">Administrator</option>
                         <option value="2">Normal</option> -->

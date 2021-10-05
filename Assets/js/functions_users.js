@@ -3,7 +3,7 @@ var divLoading = document.querySelector("#divLoading");
 var base_url = window.location.origin;
 
 document.addEventListener("DOMContentLoaded",function(){ 
-    swal("Error","DOMContentLoaded","error");       
+    // swal("Error","DOMContentLoaded","error");       
     tableUsers = $("#tableUsers").dataTable({
         "aProcessing":true,
         "aServerSide":true,
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded",function(){
             {"data":"lastname"},
             {"data":"emailperson"},
             {"data":"telephone"},
-            {"data":"idrol"},
+            {"data":"rolname"},
             {"data":"statusperson"},
             {"data":"options"},
         ],
@@ -180,6 +180,7 @@ if (document.querySelector('#formDataFiscal')) {
 }
 
 window.addEventListener('load',function(){
+    // swal("Error","Load","error");
     fntUserRols();
 }, false);
 
@@ -192,6 +193,7 @@ function fntUserRols(){
         request.onreadystatechange = function(){
             if(request.readyState == 4 && request.status == 200){                
                 document.querySelector('#listRolid').innerHTML = request.responseText;
+                console.log("ingreso a cargar roles");
                 $('#listRolid').selectpicker('render');
             }
         }            
@@ -235,13 +237,13 @@ function fntEditUser(idPerson){
     var idPerson = idPerson;
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : ActiveXObject('Microsoft.XMLHTTP');
     var ajaxUrl = base_url+'/Users/getUser/'+idPerson;
-    console.log(ajaxUrl);
+    // console.log(ajaxUrl);
     request.open('GET',ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
             var objData = JSON.parse(request.responseText);
-            console.log(objData);
+            // console.log(objData);
             if(objData.status){
                 document.querySelector('#idUser').value = objData.data.idperson;
                 document.querySelector('#txtIdentification').value = objData.data.identification;
@@ -285,15 +287,18 @@ function fntDelUser(idPerson){
             request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             request.send(strData);            
             request.onreadystatechange = function(){
-                var objData = JSON.parse(request.responseText);
-                console.log(objData);
-                if(objData.status){
-                    swal("Delete",objData.msg, "success");
-                    tableUsers.api().ajax.reload();
-                    console.log("Ingreso satisfactorio");
-                }else{
-                    swal("Atention!",objData.msg,"error");
-                    console.log("fallo el mensaje de error");
+                if(request.readyState == 4 && request.status == 200){                    
+                    request.respondText = ['{"msg":"Borrado","status":"TRUE"}'];                    
+                    var objData = JSON.parse(request.responseText);
+                    console.log(objData);
+                    if(objData.status){
+                        swal("Delete",objData.msg, "success");
+                        tableUsers.api().ajax.reload();
+                        console.log("Ingreso satisfactorio");
+                    }else{
+                        swal("Atention!",objData.msg,"error");
+                        console.log("fallo el mensaje de error");
+                    }
                 }
             }
         }

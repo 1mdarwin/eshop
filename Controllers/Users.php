@@ -1,4 +1,5 @@
-<?php 
+<?php
+require_once('Rols.php'); 
 
 class Users extends Controllers
 {
@@ -59,12 +60,18 @@ class Users extends Controllers
      */
     public function getUsers(){
         $result = $this->model->getAllUsers();
+        $rols = new Rols();
         
         // $result['options'] = '<i class="fa fa-pencil" onclick="fntEditUser(1)"/>';
         for($i=0;$i<sizeof($result);$i++){
+            $idRol = intval($result[$i]['idrol']);
+            $roles = json_decode($rols->getRol($idRol));
             $idperson = $result[$i]['idperson'];
+            $result[$i]['rolname'] = $roles->data->rolName;
+            $result[$i]['statusperson'] = (($result[$i]['statusperson'] == 1) ? "Enable" : "Disable" );
             $result[$i]['options'] = '<i class="fa fa-pencil" onclick="fntEditUser('. $idperson .')" /></i>';
-            $result[$i]['options'] .= '&nbsp;&nbsp;<i class="fa fa-trash" onclick="fntDelUser('. $idperson .')" /></i>';            
+            $result[$i]['options'] .= '&nbsp;&nbsp;<i class="fa fa-trash" onclick="fntDelUser('. $idperson .')" /></i>';
+
         }
         $result = json_encode($result, JSON_HEX_QUOT | JSON_HEX_TAG); // Allos to tags and quotation sign              
         echo $result;
@@ -89,7 +96,7 @@ class Users extends Controllers
     public function delUser()
     {
         $idperson = $_POST['idUser'];
-        $result = $this->model->deleteUser($idperson);        
+        $result = $this->model->deleteUser($idperson); 
         if ($result){
             echo $result = '{
                 "msg": "Successful user deleted",

@@ -18,7 +18,30 @@
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
-            <div class="tile-body">Create a beautiful Rols</div>
+            <div class="tile-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" id="tableRols">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name Rol</th>
+                                <th>Description Rol</th>
+                                <th>Status</th>                                
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Administrator</td>
+                                <td>My Rol</td>
+                                <td>Enable</td>
+                                <td>2573161</td>                                                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
           </div>
         </div>
       </div>

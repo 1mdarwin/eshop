@@ -35,14 +35,14 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>Darwin </td>
-                                <td>Betancourt</td>
-                                <td>darwinbc@gmail.com</td>
-                                <td>2573161</td>
-                                <td>Administrador</td>
-                                <td>Enable</td>
-                                <td>Delete</td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
                             </tr>
                         </tbody>
                     </table>

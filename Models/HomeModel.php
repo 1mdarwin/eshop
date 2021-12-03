@@ -1,12 +1,10 @@
 <?php 
-    class HomeModel
+    class HomeModel extends Mysql
     {
         public function __construct() {
             // echo "Message from modelHome";
-        }
-        public function getCarrito($params)
-        {
-            return "<pre>Data carrito: </pre>". $params;
-        }
+            parent::__construct();
+        }       
+        
     }
 ?>

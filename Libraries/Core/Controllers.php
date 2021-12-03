@@ -16,6 +16,10 @@
                 $this->model = new $model();
             } 
         }
+        public function getPermissions(int $module)
+        {
+            
+        }
 
        
     }

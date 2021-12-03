@@ -68,7 +68,7 @@ class Users extends Controllers
             $roles = json_decode($rols->getRol($idRol));
             $idperson = $result[$i]['idperson'];
             $result[$i]['rolname'] = $roles->data->rolName;
-            $result[$i]['statusperson'] = (($result[$i]['statusperson'] == 1) ? "Enable" : "Disable" );
+            $result[$i]['status'] = (($result[$i]['statusperson'] == 1) ? "Enable" : "Disabled" );
             $result[$i]['options'] = '<i class="fa fa-pencil" onclick="fntEditUser('. $idperson .')" /></i>';
             $result[$i]['options'] .= '&nbsp;&nbsp;<i class="fa fa-trash" onclick="fntDelUser('. $idperson .')" /></i>';
 

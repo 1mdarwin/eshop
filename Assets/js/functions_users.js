@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded",function(){
             {"data":"emailperson"},
             {"data":"telephone"},
             {"data":"rolname"},
-            {"data":"statusperson"},
+            {"data":"status"},
             {"data":"options"},
         ],
         'dom': '1Bfrtip',
